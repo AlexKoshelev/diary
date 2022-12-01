@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.css";
+import * as calendar from "../../utils/calendar";
 export default class Calendar extends React.Component {
   static defaultProps = {
     date: new Date(),
@@ -37,86 +38,59 @@ export default class Calendar extends React.Component {
   }
   handlePrevMonthButtonClick = () => {
     const date = new Date(this.year, this.month - 1);
-    console.log(date);
     this.setState({ date });
   };
   handleNextMonthButton = () => {
     const date = new Date(this.year, this.month + 1);
-    console.log(date);
-
     this.setState({ date });
   };
-  handleSelectChenge = () => {};
+  //получаем из ref выбранное значение года и месяца и передаем в date
+  handleSelectChange = () => {
+    const month = this.monthSelect.value;
+    const year = this.yearSelect.value;
+    const date = new Date(year, month);
+    this.setState({ date });
+  };
   //устанавливаем состояние и сообщаем родителю, что выбрана новая дата
   handleDayClick = (date) => {
     this.setState({ selectedDate: date });
     this.props.onChange(date);
   };
-
+  getClassName(date, currentDate, selectedDate) {
+    if (calendar.areEqual(date, currentDate)) {
+      return "today";
+    } else if (calendar.areEqual(date, selectedDate)) {
+      return "selected";
+    } else {
+      return "";
+    }
+  }
   render() {
     const { years, monthNames, weekDayNames } = this.props;
-
-    const monthDate = [
-      [
-        undefined,
-        undefined,
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-      ],
-      [
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-      ],
-      [
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-      ],
-      [
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-      ],
-      [
-        new Date(),
-        new Date(),
-        new Date(),
-        new Date(),
-        undefined,
-        undefined,
-        undefined,
-      ],
-    ];
+    const { currentDate, selectedDate } = this.state;
+    const monthDate = calendar.getMonthDate(this.year, this.month);
 
     return (
       <div className="calendar">
         <header>
           <button onClick={this.handlePrevMonthButtonClick}>{"<"}</button>
 
-          <select>
+          <select
+            ref={(element) => (this.monthSelect = element)}
+            value={this.month}
+            onChange={this.handleSelectChange}
+          >
             {monthNames.map((month, index) => (
               <option key={month} value={index}>
                 {month}
               </option>
             ))}
           </select>
-          <select>
+          <select
+            ref={(element) => (this.yearSelect = element)}
+            value={this.year}
+            onChange={this.handleSelectChange}
+          >
             {years.map((year) => (
               <option key={year} value={year}>
                 {year}
@@ -139,7 +113,10 @@ export default class Calendar extends React.Component {
                 {week.map((date, index) =>
                   date ? (
                     <td
-                      className="day"
+                      className={
+                        `day ` +
+                        this.getClassName(date, currentDate, selectedDate)
+                      }
                       key={index}
                       onClick={() => this.handleDayClick(date)}
                     >

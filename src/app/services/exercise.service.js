@@ -12,6 +12,8 @@ const exerciseService = {
   }, */
   fetchAll: async () => {
     const { data } = await httpService.get(exerciseEndpoin);
+    console.log(data);
+
     return data;
   },
 };
