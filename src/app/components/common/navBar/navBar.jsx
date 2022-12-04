@@ -3,6 +3,7 @@ import "./navBar.scss";
 import { ReactComponent as InstLogo } from "../../../assets/svg/instagram.svg";
 import { ReactComponent as TelegramLogo } from "../../../assets/svg/telegram.svg";
 import { ReactComponent as WhatsLogo } from "../../../assets/svg/whatsapp.svg";
+import { NavLink } from "react-router-dom";
 const NavBar = () => {
   return (
     <>
@@ -22,35 +23,35 @@ const NavBar = () => {
           <menu className="header__menu">
             <div className="header__item headerButton">
               <span className="header__item-button">
-                <a href="/" className="href">
+                <NavLink to="/diary" className="href">
                   Дневник
-                </a>
+                </NavLink>
               </span>
             </div>
             <div className="header__item headerButton">
-              <a href="/" className="href">
+              <NavLink to="/rewiews" className="href">
                 Отзывы
-              </a>
+              </NavLink>
             </div>
             <div className="header__item headerButton">
-              <a href="/" className="href">
+              <NavLink to="/nutrition" className="href">
                 Питание
-              </a>
+              </NavLink>
             </div>
             <div className="header__item headerButton">
-              <a href="/" className="href">
+              <NavLink to="/workouts" className="href">
                 Тренировки
-              </a>
+              </NavLink>
             </div>
             <div className="header__item headerButton">
-              <a href="/" className="href">
+              <NavLink to="/" className="href">
                 ABOUT
-              </a>
+              </NavLink>
             </div>
             <div className="header__item headerButton">
-              <a href="/" className="href">
+              <NavLink to="/login/signin" className="href">
                 Войти
-              </a>
+              </NavLink>
             </div>
           </menu>
         </div>
