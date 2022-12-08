@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { validator } from "../../../utils/validator";
-/* import TextField from "../../common/form/textField"; */
+import RadioField from "../../common/form/radioField/radioField";
+import TextField from "../../common/form/textField/textField";
+import "./registerForm.scss";
+/*   */
 /* import SelectField from "../../common/form/selectField";
 import RadioField from "../../common/form/radioField";
 import MultiSelectField from "../../common/form/multiSelectField";
@@ -11,12 +15,18 @@ const RegisterForm = () => {
   /*   const dispatch = useDispatch(); */
   const [data, setData] = useState({
     email: "",
-    password: "",
-    profession: "",
-    sex: "male",
     name: "",
-    qualities: [],
-    licence: false,
+    password: "",
+    phone: "",
+    sex: "female",
+    age: "",
+    arm: "",
+    bust: "",
+    growth: "",
+    hips: "",
+    leg: "",
+    waist: "",
+    waight: "",
   });
 
   /*   const qualities = useSelector(getQualities());
@@ -85,6 +95,7 @@ const RegisterForm = () => {
   };
   useEffect(() => {
     validate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
   const validate = () => {
     const errors = validator(data, validatorConfig);
@@ -105,72 +116,117 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* <TextField
-        label="Электронная почта"
-        name="email"
-        value={data.email}
-        onChange={handleChange}
-        error={errors.email}
-      /> */}
-      {/* <TextField
-        label="Имя"
-        name="name"
-        value={data.name}
-        onChange={handleChange}
-        error={errors.name}
-      /> */}
-      {/* <TextField
-        label="Пароль"
-        type="password"
-        name="password"
-        value={data.password}
-        onChange={handleChange}
-        error={errors.password}
-      /> */}
-      {/* <SelectField
-        label="Выбери свою профессию"
-        defaultOption="Choose..."
-        options={professionsList}
-        name="profession"
-        onChange={handleChange}
-        value={data.profession}
-        error={errors.profession}
-      /> */}
-      {/* <RadioField
-        options={[
-          { name: "Male", value: "male" },
-          { name: "Female", value: "female" },
-          { name: "Other", value: "other" },
-        ]}
-        value={data.sex}
-        name="sex"
-        onChange={handleChange}
-        label="Выберите ваш пол"
-      /> */}
-      {/* <MultiSelectField
-        options={qualitiesList}
-        onChange={handleChange}
-        defaultValue={data.qualities}
-        name="qualities"
-        label="Выберите ваши качества"
-      /> */}
-      {/* <CheckBoxField
-        value={data.licence}
-        onChange={handleChange}
-        name="licence"
-        error={errors.licence}
-      >
-        Подтвердить <a>лицензионное соглашение</a>
-      </CheckBoxField> */}
-      <button
-        className="btn btn-primary w-100 mx-auto"
-        type="submit"
-        disabled={!isValid}
-      >
-        Submit
-      </button>
-    </form>
+    <>
+      <div className="form__login-text">Зарегистрируйся</div>
+      <div className="text__main">Чтобы получить доступ ко всем программам</div>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          label="Введите электронную почту"
+          placeholder="Почта"
+          name="email"
+          value={data.email}
+          onChange={handleChange}
+          error={errors.email}
+        />
+        <TextField
+          label="Введите пароль"
+          placeholder="Пароль"
+          name="password"
+          value={data.password}
+          onChange={handleChange}
+          error={errors.password}
+        />
+        <TextField
+          label="Укажите свое имя"
+          placeholder="Имя"
+          name="name"
+          value={data.name}
+          onChange={handleChange}
+          error={errors.name}
+        />
+
+        <RadioField
+          options={[
+            { name: "Женщина", value: "female" },
+            { name: "Мужчина", value: "male" },
+          ]}
+          value={data.sex}
+          name="sex"
+          onChange={handleChange}
+          label="Выберите ваш пол"
+        />
+        <TextField
+          label="Введите номер телефона"
+          placeholder="Номер телефона"
+          name="phone"
+          value={data.phone}
+          onChange={handleChange}
+        />
+        <TextField
+          label="Укажите свои параметры:"
+          placeholder="Ваш возраст"
+          name="age"
+          value={data.age}
+          onChange={handleChange}
+        />
+        <TextField
+          placeholder="Рост"
+          name="growth"
+          value={data.growth}
+          onChange={handleChange}
+        />
+        <TextField
+          placeholder="Вес"
+          name="waight"
+          value={data.waight}
+          onChange={handleChange}
+        />
+        <TextField
+          placeholder="Обхват талии"
+          name="waist"
+          value={data.waist}
+          onChange={handleChange}
+        />
+        <TextField
+          placeholder="Обхват груди"
+          name="bust"
+          value={data.bust}
+          onChange={handleChange}
+        />
+        <TextField
+          placeholder="Обхват бедер"
+          name="hips"
+          value={data.hips}
+          onChange={handleChange}
+        />
+        <TextField
+          placeholder="Обхват бедра"
+          name="leg"
+          value={data.leg}
+          onChange={handleChange}
+        />
+        <TextField
+          placeholder="Бицепс"
+          name="arm"
+          value={data.arm}
+          onChange={handleChange}
+        />
+        <div className="form__btn-container">
+          <button
+            className="form__btn"
+            type="submit"
+            disabled={!isValid /* || loginError */}
+          >
+            Зарегистрироваться
+          </button>
+          <button className="form__btn">
+            <NavLink to={"/login/signin"} className="href">
+              Войти
+            </NavLink>
+          </button>
+        </div>
+      </form>
+    </>
   );
 };
 

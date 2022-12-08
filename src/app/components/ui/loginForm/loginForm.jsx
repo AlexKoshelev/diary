@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { validator } from "../../../utils/validator";
 import TextField from "../../common/form/textField/textField";
-/* import CheckBoxField from "../../common/form/checkBoxField/checkBoxField"; */
 import "./loginForm.scss";
-/* import Logo from "../../../assets/img/logo.png"; */
-/* import { NavLink } from "react-router-dom"; */
+
 /* 
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,6 +44,7 @@ const LoginForm = () => {
   };
   useEffect(() => {
     validate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
   const validate = () => {
     const errors = validator(data, validatorConfig);
@@ -64,62 +63,51 @@ const LoginForm = () => {
     dispatch(logIn({ payload: data, redirect })); */
   };
   return (
-    /*  <div className="form">
-      <div className="form__wrapper">
-        <div className="form__logo">
-          <img src={Logo} alt="Логотип"></img>
-        </div>
-        <div className="form__login-text">Войди</div>
-        <div className="text__main">
-          Чтобы получить доступ ко всем программам
-        </div> */
-    <form onSubmit={handleSubmit}>
-      <TextField
-        label=""
-        name="email"
-        value={data.email}
-        onChange={handleChange}
-        error={errors.email}
-        placeholder="Почта"
-      />
-      <TextField
-        label=""
-        type="password"
-        name="password"
-        placeholder="Пароль"
-        value={data.password}
-        onChange={handleChange}
-        error={errors.password}
-      />
-      {/* <CheckBoxField
+    <>
+      <div className="form__login-text">Войди</div>
+      <div className="text__main">Чтобы получить доступ ко всем программам</div>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          label=""
+          name="email"
+          value={data.email}
+          onChange={handleChange}
+          error={errors.email}
+          placeholder="Почта"
+        />
+        <TextField
+          label=""
+          type="password"
+          name="password"
+          placeholder="Пароль"
+          value={data.password}
+          onChange={handleChange}
+          error={errors.password}
+        />
+        {/* <CheckBoxField
             value={data.stayOn}
             onChange={handleChange}
             name="stayOn"
           >
             Оставаться в системе
           </CheckBoxField> */}
-      {/* {loginError && <p className="text-danger">{loginError}</p>} */}
-      <div className="form__btn-container">
-        <button
-          className="form__btn"
-          type="submit"
-          disabled={!isValid /* || loginError */}
-        >
-          <NavLink to={"/login/signup"} className="href">
-            Регистрация
-          </NavLink>
-        </button>
-        <button
-          className="form__btn"
-          type="submit"
-          disabled={!isValid /* || loginError */}
-        >
-          Войти
-        </button>
-      </div>
-    </form>
-    /*    </div>
-    </div> */
+        {/* {loginError && <p className="text-danger">{loginError}</p>} */}
+        <div className="form__btn-container">
+          <button className="form__btn">
+            <NavLink to={"/login/signup"} className="href">
+              Регистрация
+            </NavLink>
+          </button>
+          <button
+            className="form__btn"
+            type="submit"
+            disabled={!isValid /* || loginError */}
+          >
+            Войти
+          </button>
+        </div>
+      </form>
+    </>
   );
 };
 

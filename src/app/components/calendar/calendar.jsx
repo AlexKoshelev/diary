@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import "./calendar.scss";
 import * as calendar from "../../utils/calendar";
 export default class Calendar extends React.Component {
   static defaultProps = {
@@ -73,9 +73,15 @@ export default class Calendar extends React.Component {
     return (
       <div className="calendar">
         <header>
-          <button onClick={this.handlePrevMonthButtonClick}>{"<"}</button>
+          <button
+            className="calendar__element"
+            onClick={this.handlePrevMonthButtonClick}
+          >
+            {"<"}
+          </button>
 
           <select
+            className="calendar__element"
             ref={(element) => (this.monthSelect = element)}
             value={this.month}
             onChange={this.handleSelectChange}
@@ -87,6 +93,7 @@ export default class Calendar extends React.Component {
             ))}
           </select>
           <select
+            className="calendar__element"
             ref={(element) => (this.yearSelect = element)}
             value={this.year}
             onChange={this.handleSelectChange}
@@ -97,7 +104,12 @@ export default class Calendar extends React.Component {
               </option>
             ))}
           </select>
-          <button onClick={this.handleNextMonthButton}>{">"}</button>
+          <button
+            className="calendar__element"
+            onClick={this.handleNextMonthButton}
+          >
+            {">"}
+          </button>
         </header>
         <table>
           <thead>

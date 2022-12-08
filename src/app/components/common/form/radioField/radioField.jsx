@@ -7,9 +7,9 @@ const RadioField = ({ options, name, onChange, value, label }) => {
     onChange({ name: target.name, value: target.value });
   };
   return (
-    <div className="mb-4">
+    <div className="radiofield">
       <label className="form-label">{label}</label>
-      <div>
+      <div className="checkbox__container">
         {options.map((option) => (
           <div
             key={option.name + "_" + option.value}
