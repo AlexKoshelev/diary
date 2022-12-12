@@ -3,9 +3,9 @@ import localStorageService from "./localStorage.service";
 const trainersEndpoin = "trainers/";
 
 const trainersService = {
-  get: async () => {
+  fetchAll: async () => {
     const { data } = await httpService.get(trainersEndpoin);
-    console.log(data);
+
     return data;
   },
   create: async (payload) => {

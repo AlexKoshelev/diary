@@ -1,45 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { getAuthErrors, signUp } from "../../../store/trainers";
 import { validator } from "../../../utils/validator";
 import RadioField from "../../common/form/radioField/radioField";
 import TextField from "../../common/form/textField/textField";
 import "./registerForm.scss";
-/*   */
-/* import SelectField from "../../common/form/selectField";
-import RadioField from "../../common/form/radioField";
-import MultiSelectField from "../../common/form/multiSelectField";
-import CheckBoxField from "../../common/form/checkBoxField/checkBoxField"; */
-/* import { signUp } from "../../store/users"; */
 
 const RegisterForm = () => {
-  /*   const dispatch = useDispatch(); */
+  const dispatch = useDispatch();
+  const loginError = useSelector(getAuthErrors());
+  const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
     name: "",
     password: "",
     phone: "",
     sex: "female",
-    age: "",
-    arm: "",
-    bust: "",
-    growth: "",
-    hips: "",
-    leg: "",
-    waist: "",
-    waight: "",
   });
 
-  /*   const qualities = useSelector(getQualities());
-  const qualitiesList = qualities.map((q) => ({
-    label: q.name,
-    value: q._id,
-  })); */
-
-  /*   const professions = useSelector(getProfessions());
-  const professionsList = professions.map((p) => ({
-    label: p.name,
-    value: p._id,
-  })); */
   const [errors, setErrors] = useState({});
 
   const handleChange = (target) => {
@@ -108,11 +87,8 @@ const RegisterForm = () => {
     e.preventDefault();
     const isValid = validate();
     if (!isValid) return;
-    /*  const newData = {
-      ...data,
-      qualities: data.qualities.map((q) => q.value),
-    }; */
-    /*     dispatch(signUp(newData)); */
+    dispatch(signUp(data));
+    navigate("/workouts");
   };
 
   return (
@@ -130,8 +106,9 @@ const RegisterForm = () => {
         />
         <TextField
           label="Введите пароль"
-          placeholder="Пароль"
+          type="password"
           name="password"
+          placeholder="Пароль"
           value={data.password}
           onChange={handleChange}
           error={errors.password}
@@ -162,60 +139,12 @@ const RegisterForm = () => {
           value={data.phone}
           onChange={handleChange}
         />
-        <TextField
-          label="Укажите свои параметры:"
-          placeholder="Ваш возраст"
-          name="age"
-          value={data.age}
-          onChange={handleChange}
-        />
-        <TextField
-          placeholder="Рост"
-          name="growth"
-          value={data.growth}
-          onChange={handleChange}
-        />
-        <TextField
-          placeholder="Вес"
-          name="waight"
-          value={data.waight}
-          onChange={handleChange}
-        />
-        <TextField
-          placeholder="Обхват талии"
-          name="waist"
-          value={data.waist}
-          onChange={handleChange}
-        />
-        <TextField
-          placeholder="Обхват груди"
-          name="bust"
-          value={data.bust}
-          onChange={handleChange}
-        />
-        <TextField
-          placeholder="Обхват бедер"
-          name="hips"
-          value={data.hips}
-          onChange={handleChange}
-        />
-        <TextField
-          placeholder="Обхват бедра"
-          name="leg"
-          value={data.leg}
-          onChange={handleChange}
-        />
-        <TextField
-          placeholder="Бицепс"
-          name="arm"
-          value={data.arm}
-          onChange={handleChange}
-        />
+
         <div className="form__btn-container">
           <button
             className="form__btn"
             type="submit"
-            disabled={!isValid /* || loginError */}
+            disabled={!isValid || loginError}
           >
             Зарегистрироваться
           </button>

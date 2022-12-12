@@ -22,8 +22,6 @@ const exersicesSlice = createSlice({
       state.isLoading = false;
     },
     exersiceCreate(state, action) {
-      console.log(state);
-      console.log(action);
       state.entities.push(action.payload);
     },
     exersiceRemoved: (state, action) => {
@@ -48,6 +46,8 @@ export const loadExersicesList = () => async (dispatch) => {
   dispatch(exersicesRequested());
   try {
     const content = await exerciseService.fetchAll();
+    console.log(content);
+
     dispatch(exersicesReceved(content));
   } catch (error) {
     dispatch(exersicesRequestFiled(error.message));
@@ -57,6 +57,18 @@ export const createExersices = (exercise) => async (dispatch) => {
   try {
     const { content } = await exerciseService.createExercise(exercise);
     dispatch(exersiceCreate(content));
+  } catch (error) {
+    dispatch(exersicesRequestFiled(error.message));
+  }
+};
+export const removeExercise = (id) => async (dispatch) => {
+  console.log(id);
+
+  try {
+    const { content } = await exerciseService.removeExercise(id);
+    if (content === null) {
+      dispatch(exersiceRemoved(id));
+    }
   } catch (error) {
     dispatch(exersicesRequestFiled(error.message));
   }

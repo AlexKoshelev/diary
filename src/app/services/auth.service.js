@@ -1,4 +1,4 @@
-/* import axios from "axios";
+import axios from "axios";
 import localStorageService from "./localStorage.service";
 
 export const httpAuth = axios.create({
@@ -34,4 +34,3 @@ const authService = {
 };
 
 export default authService;
- */

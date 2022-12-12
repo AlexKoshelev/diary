@@ -1,4 +1,4 @@
-/* const TOKEN_KEY = "jwt-token";
+const TOKEN_KEY = "jwt-token";
 const REFRESH_KEY = "jwt-refresh-token";
 const EXPIRES_KEY = "jwt-expires";
 const USERID_KEY = "user-local-id";
@@ -44,4 +44,3 @@ const localStorageService = {
   removeAuthData,
 };
 export default localStorageService;
- */

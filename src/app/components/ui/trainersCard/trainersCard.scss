@@ -1,0 +1,12 @@
+$MAIN_COLOR1:#FDF5F4;
+$MAIN_COLOR2:#F4E1DD;
+$MAIN_COLOR3:#BD937B;
+$GOLD_COLOR:#B39365;
+.trainers__card{
+    display: flex;
+    font-size: 0.75rem;
+    justify-content: space-between;
+    color: $MAIN_COLOR3;
+    background-color: #FDF5F4;
+    padding: 10px;
+}

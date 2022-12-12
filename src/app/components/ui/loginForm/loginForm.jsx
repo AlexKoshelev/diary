@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { getAuthErrors, logIn } from "../../../store/trainers";
 import { validator } from "../../../utils/validator";
 import TextField from "../../common/form/textField/textField";
 import "./loginForm.scss";
 
-/* 
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getAuthErrors, logIn } from "../../store/users"; */
-
 const LoginForm = () => {
+  const dispatch = useDispatch();
+  const loginError = useSelector(getAuthErrors());
   const [data, setData] = useState({
     email: "",
     password: "",
-    stayOn: false,
   });
-  /*   const loginError = useSelector(getAuthErrors()); */
-  /*  console.log(loginError); */
-
-  /* const dispatch = useDispatch(); */
-  /*   const history = useHistory(); */
 
   const [errors, setErrors] = useState({});
-
+  const navigate = useNavigate();
   const handleChange = (target) => {
     setData((prevState) => ({
       ...prevState,
@@ -57,10 +50,10 @@ const LoginForm = () => {
     e.preventDefault();
     const isValid = validate();
     if (!isValid) return;
-    /*  const redirect = history.location.state
-      ? history.location.state.from.pathname
-      : "/";
-    dispatch(logIn({ payload: data, redirect })); */
+    console.log(data);
+    navigate("/workouts");
+
+    dispatch(logIn({ payload: data }));
   };
   return (
     <>
@@ -84,14 +77,7 @@ const LoginForm = () => {
           onChange={handleChange}
           error={errors.password}
         />
-        {/* <CheckBoxField
-            value={data.stayOn}
-            onChange={handleChange}
-            name="stayOn"
-          >
-            Оставаться в системе
-          </CheckBoxField> */}
-        {/* {loginError && <p className="text-danger">{loginError}</p>} */}
+
         <div className="form__btn-container">
           <button className="form__btn">
             <NavLink to={"/login/signup"} className="href">
@@ -101,7 +87,7 @@ const LoginForm = () => {
           <button
             className="form__btn"
             type="submit"
-            disabled={!isValid /* || loginError */}
+            disabled={!isValid || loginError}
           >
             Войти
           </button>
