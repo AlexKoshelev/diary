@@ -15,15 +15,15 @@ const trainersService = {
     );
     return data;
   },
-  getCurrentUser: async () => {
+  getCurrentTrainer: async () => {
     const { data } = await httpService.get(
-      trainersEndpoin + localStorageService.getUserId()
+      trainersEndpoin + localStorageService.getTrainerId()
     );
     return data;
   },
   update: async (payload) => {
     const { data } = await httpService.patch(
-      trainersEndpoin + localStorageService.getUserId(),
+      trainersEndpoin + localStorageService.getTrainerId(),
       payload
     );
 

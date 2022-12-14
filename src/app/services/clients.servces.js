@@ -8,25 +8,28 @@ const clientsService = {
 
     return data;
   },
-  create: async (payload) => {
+  createClient: async (payload) => {
     const { data } = await httpService.put(
       clientsEndpoin + payload._id,
       payload
     );
     return data;
   },
-  getCurrentUser: async () => {
+  getCurrentTrainer: async () => {
     const { data } = await httpService.get(
-      clientsEndpoin + localStorageService.getUserId()
+      clientsEndpoin + localStorageService.getTrainerId()
     );
     return data;
   },
   update: async (payload) => {
     const { data } = await httpService.patch(
-      clientsEndpoin + localStorageService.getUserId(),
+      clientsEndpoin + localStorageService.getTrainerId(),
       payload
     );
-
+    return data;
+  },
+  removeClient: async (clientId) => {
+    const { data } = await httpService.delete(clientsEndpoin + clientId);
     return data;
   },
 };

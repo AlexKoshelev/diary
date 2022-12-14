@@ -2,29 +2,29 @@ import React from "react";
 /* import PropTypes from "prop-types"; */
 import "./trainersCard.scss";
 import SelectField from "../../common/form/selectField/selectField";
-import { useState } from "react";
+/* import { useState } from "react"; */
 const TrainersCard = ({ clients }) => {
-  const [clientData, setClientData] = useState({ name: "", id: "" });
+  /*   const [clientData, setClientData] = useState({ name: "", id: "" }); */
   const clientsList = clients
     ? Object.values(clients).map((c) => ({
         label: c.name,
         value: c.id,
       }))
     : {};
-  const handleChange = (target) => {
+  /* const handleChange = (target) => {
     setClientData((prevState) => ({
       ...prevState,
       [target.name]: target.value,
     }));
-  };
-  console.log(clientData);
+  }; */
+
   return (
     <div className="trainers__card">
       <div className="trainers__card-selector">
         <SelectField
           defaultOption="Клиенты: "
           value={clients.id}
-          onChange={handleChange}
+          /*  onChange={handleChange} */
           options={clientsList}
           error={""}
           name={"name"}

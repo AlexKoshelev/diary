@@ -3,6 +3,7 @@ import About from "./components/page/about/about";
 import Diary from "./components/page/diary/diary";
 import Nutrition from "./components/page/nutrition/nutrition";
 import ReviewsPage from "./components/page/reviewsPage/reviewsPage";
+import TrainerPage from "./components/page/trainerPage/trainerPage";
 import Workouts from "./components/page/workouts/workouts";
 import LoginForm from "./components/ui/loginForm/loginForm";
 import RegisterForm from "./components/ui/registerForm/registerForm";
@@ -29,6 +30,10 @@ const routes = () => [
   {
     path: "/workouts",
     element: <Workouts />,
+  },
+  {
+    path: "/trainerPage",
+    element: <TrainerPage />,
   },
   {
     path: "/login",

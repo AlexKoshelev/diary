@@ -21,7 +21,7 @@ const clientsSlice = createSlice({
       state.error = action.payload;
       state.isLoading = false;
     },
-    clientsCreate(state, action) {
+    clientsCreated: (state, action) => {
       state.entities.push(action.payload);
     },
     clientsRemoved: (state, action) => {
@@ -38,7 +38,7 @@ const {
   clientsRequested,
   clientsReceved,
   clientsRequestFiled,
-  clientsCreate,
+  clientsCreated,
   clientsRemoved,
 } = actions;
 
@@ -46,25 +46,27 @@ export const loadClientsList = () => async (dispatch) => {
   dispatch(clientsRequested());
   try {
     const content = await clientsService.fetchAll();
-
     dispatch(clientsReceved(content));
   } catch (error) {
     dispatch(clientsRequestFiled(error.message));
   }
 };
-export const createclients = (clients) => async (dispatch) => {
+export const createClients = (client) => async (dispatch) => {
+  console.log(client);
+
   try {
-    const { content } = await clientsService.createclients(clients);
-    dispatch(clientsCreate(content));
+    const { content } = await clientsService.createClient(client);
+    console.log(content);
+
+    dispatch(clientsCreated(content));
   } catch (error) {
     dispatch(clientsRequestFiled(error.message));
   }
 };
-export const removeComment = (_id) => async (dispatch) => {
+export const removeClient = (_id) => async (dispatch) => {
   console.log(_id);
-
   try {
-    const { content } = await clientsService.removeComment(_id);
+    const { content } = await clientsService.removeClient(_id);
     if (content === null) {
       dispatch(clientsRemoved(_id));
     }
@@ -72,14 +74,15 @@ export const removeComment = (_id) => async (dispatch) => {
     dispatch(clientsRequestFiled(error.message));
   }
 };
-export const getCurrentUserData = () => (state) => {
-  return  state.clients.entities
-      ?  state.clients.entities.find((с) => с._id === state.users.auth.userId)
-      : null;
+export const getCurrentClientData = () => (state) => {
+  return state.clients.entities
+    ? state.clients.find((с) => с._id === state.users.auth.userId)
+    : null;
 };
-export const getclients = () => (state) => state.clients.entities;
-export const getclientsLoadingStatus = () => (state) => state.clients.isLoading;
+export const getClients = () => (state) => state.clients.entities;
+
+export const getClientsLoadingStatus = () => (state) => state.clients.isLoading;
 export const getClientsById = (id) => (state) =>
-  state.clients.entities.content.filter((client) => client.trainer_id === id);
+  state.clients.entities.filter((client) => client.trainerId === id);
 
 export default clientsReducer;

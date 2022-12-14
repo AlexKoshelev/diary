@@ -28,7 +28,6 @@ const TextField = ({
   const classes = classNames("textfield", className);
   return (
     <div className={classes}>
-      <label htmlFor={name}>{label}</label>
       <div className="input-group has-validation">
         <div className="input__container">
           <input

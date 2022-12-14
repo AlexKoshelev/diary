@@ -1,25 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import {
-  getClientsById,
-  getclientsLoadingStatus,
-} from "../../../store/clients";
-import { getTrainers, getTrainersLoadingStatus } from "../../../store/trainers";
-import Table from "../../ui/table/table";
+import { getClients } from "../../../store/clients";
+/* import { getTrainers, getTrainersLoadingStatus } from "../../../store/trainers";
+import Table from "../../ui/table/table"; */
 
 const Diary = () => {
-  const trainer = useSelector(getTrainers());
-  const trainerIsLoading = useSelector(getTrainersLoadingStatus());
+  /*   const clients = useSelector(getClientsById(trainer.content._id)); */
 
-  const clients = useSelector(getClientsById(trainer.content._id));
-
-  const clientsIsLoading = useSelector(getclientsLoadingStatus());
+  /*   const clientsIsLoading = useSelector(getClientsLoadingStatus()); */
 
   return (
     <>
-      {!trainerIsLoading && !clientsIsLoading && (
-        <Table trainer={trainer} clients={clients} />
-      )}
+      {/*    {!trainerIsLoading   && !clientsIsLoading && (
+        <Table trainer={trainer}  clients={clients}  />
+      )} */}
     </>
   );
 };

@@ -10,7 +10,7 @@ const initialState = localStorageService.getAccessToken()
       entities: null,
       isLoading: true,
       errors: null,
-      auth: { userId: localStorageService.getUserId() },
+      auth: { trainerId: localStorageService.getTrainerId() },
       isLoggedIn: true,
       dataLoaded: false,
     }
@@ -78,7 +78,7 @@ const {
   trainersReceved,
   trainersRequestFiled,
   trainersCreate,
-  trainersRemoved,
+
   authRequestFailed,
   authRequestSucces,
   trainerCreated,
@@ -95,7 +95,7 @@ export const logIn =
     dispatch(authRequested());
     try {
       const data = await authService.login({ email, password });
-      dispatch(authRequestSucces({ userId: data.localId }));
+      dispatch(authRequestSucces({ trainerId: data.localId }));
       localStorageService.setTokens(data);
       console.log("вы вошли");
     } catch (error) {
@@ -117,7 +117,6 @@ function createTrainer(payload) {
     try {
       const { content } = await trainersService.create(payload);
       dispatch(trainerCreated(content));
-      /*  history.push("/users"); */
     } catch (error) {
       dispatch(createTrainerFailed(error.message));
     }
@@ -126,7 +125,6 @@ function createTrainer(payload) {
 export const logOut = () => (dispatch) => {
   localStorageService.removeAuthData();
   dispatch(trainerLoggedOut());
-  /*   history.push("/"); */
 };
 
 export const signUp =
@@ -136,7 +134,7 @@ export const signUp =
     try {
       const data = await authService.register({ email, password });
       localStorageService.setTokens(data);
-      dispatch(authRequestSucces({ userId: data.localId }));
+      dispatch(authRequestSucces({ trainerId: data.localId }));
       dispatch(
         createTrainer({
           _id: data.localId,
@@ -168,21 +166,19 @@ export const createTrainers = (trainers) => async (dispatch) => {
     dispatch(trainersRequestFiled(error.message));
   }
 };
-export const removeComment = (_id) => async (dispatch) => {
-  console.log(_id);
-
-  try {
-    const { content } = await trainersService.removeComment(_id);
-    if (content === null) {
-      dispatch(trainersRemoved(_id));
-    }
-  } catch (error) {
-    dispatch(trainersRequestFiled(error.message));
-  }
+export const getCurrentTrainerData = () => (state) => {
+  return state.trainers.entities
+    ? state.trainers.entities.find(
+        (u) => u._id === state.trainers.auth.trainerId
+      )
+    : null;
 };
 
 export const getTrainers = () => (state) => state.trainers.entities;
 export const getTrainersLoadingStatus = () => (state) =>
   state.trainers.isLoading;
 export const getAuthErrors = () => (state) => state.trainers.errors;
+export const getCurrentTrainerId = () => (state) =>
+  state.trainers.auth.trainerId;
+export const getIsLoggedIn = () => (state) => state.trainers.isLoggedIn;
 export default trainersReducer;

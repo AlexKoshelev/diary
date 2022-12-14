@@ -1,0 +1,65 @@
+$MAIN_COLOR1:#FDF5F4;
+$MAIN_COLOR2:#F4E1DD;
+$MAIN_COLOR3:#BD937B;
+$GOLD_COLOR:#B39365;
+.trainerPage{
+    width: 600px;
+    height: 100%;
+    margin: 0 auto;
+/*  align-content: center;
+  margin-right: 0px; */
+    font-size: 0.8rem;
+    line-height: 1rem;
+    color:#7e563e;
+    justify-content: center;
+}
+.trainerPage__main{
+    display: flex;
+}
+.createClient__container {
+    background-color: $MAIN_COLOR1;
+    border-radius: 10px;
+    
+}
+.hiddenForm{
+    display: none;
+}
+.trainerPage_button{
+   
+    background-color: #F4E1DD;
+    color: #BD937B;
+    
+}
+.main__btn{
+    justify-content: space-between;
+    display: flex;
+}
+.main__info{
+margin: 1em;
+}
+.clients__info{
+    margin: 0px;
+    padding: 0px;
+}
+.trainerPage_addbtn{
+    background-color: #FDF5F4;
+    color: #BD937B;
+   margin: 10px;
+   text-decoration:underline;
+}
+.clients__list{
+    font-size: 0.7rem;
+    background-color: #FDF5F4;
+    color: #BD937B;
+    padding: 3px 10px;
+    border-radius: 10px;
+    align-items: center;
+    vertical-align: middle;
+    display: flex;
+    justify-content: space-between;
+  
+}
+.client_button{
+background-color: #FDF5F4;
+vertical-align: middle;
+}

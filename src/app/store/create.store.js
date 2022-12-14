@@ -1,13 +1,13 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import clientsReducer from "./clients";
-import exersiceReducer from "./exercise";
+
 import trainersReducer from "./trainers";
 
 //Вспомогательная функция combineReducers преобразует объект, значениями которого являются различные функции редюсеры, в одну функцию редюсер, которую можно передать в метод createStore
 
 const rootReducer = combineReducers({
   trainers: trainersReducer,
-  exercises: exersiceReducer,
+
   clients: clientsReducer,
 });
 

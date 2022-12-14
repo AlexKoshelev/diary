@@ -4,7 +4,11 @@ import { ReactComponent as InstLogo } from "../../../assets/svg/instagram.svg";
 import { ReactComponent as TelegramLogo } from "../../../assets/svg/telegram.svg";
 import { ReactComponent as WhatsLogo } from "../../../assets/svg/whatsapp.svg";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getCurrentTrainerData } from "../../../store/trainers";
 const NavBar = () => {
+  const currentTrainer = useSelector(getCurrentTrainerData());
+
   return (
     <>
       <header className="header">
@@ -49,9 +53,15 @@ const NavBar = () => {
               </NavLink>
             </div>
             <div className="header__item headerButton">
-              <NavLink to="/login/signin" className="href">
-                Войти
-              </NavLink>
+              {currentTrainer ? (
+                <NavLink to="/trainerPage" className="href">
+                  {currentTrainer.name}
+                </NavLink>
+              ) : (
+                <NavLink to="/login/signin" className="href">
+                  Войти
+                </NavLink>
+              )}
             </div>
           </menu>
         </div>
