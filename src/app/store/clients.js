@@ -58,7 +58,7 @@ export const createClients = (client) => async (dispatch) => {
     const { content } = await clientsService.createClient(client);
     console.log(content);
 
-    dispatch(clientsCreated(content));
+    dispatch(clientsCreated(client));
   } catch (error) {
     dispatch(clientsRequestFiled(error.message));
   }
@@ -82,7 +82,9 @@ export const getCurrentClientData = () => (state) => {
 export const getClients = () => (state) => state.clients.entities;
 
 export const getClientsLoadingStatus = () => (state) => state.clients.isLoading;
-export const getClientsById = (id) => (state) =>
-  state.clients.entities.filter((client) => client.trainerId === id);
-
+export const getClientsById = (id) => (state) => {
+  if (state.clients.entities && state.clients.entities !== undefined) {
+    return state.clients.entities.filter((client) => client.trainerId === id);
+  }
+};
 export default clientsReducer;

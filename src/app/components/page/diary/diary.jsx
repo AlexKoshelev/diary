@@ -1,6 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { getClients } from "../../../store/clients";
+/* import { useSelector } from "react-redux";
+import { getClients } from "../../../store/clients"; */
 /* import { getTrainers, getTrainersLoadingStatus } from "../../../store/trainers";
 import Table from "../../ui/table/table"; */
 

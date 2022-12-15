@@ -9,10 +9,14 @@ const clientsService = {
     return data;
   },
   createClient: async (payload) => {
+    console.log(payload);
+
     const { data } = await httpService.put(
       clientsEndpoin + payload._id,
       payload
     );
+    console.log(data);
+
     return data;
   },
   getCurrentTrainer: async () => {

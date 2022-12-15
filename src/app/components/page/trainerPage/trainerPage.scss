@@ -48,6 +48,7 @@ margin: 1em;
    text-decoration:underline;
 }
 .clients__list{
+    margin: 5px;
     font-size: 0.7rem;
     background-color: #FDF5F4;
     color: #BD937B;
@@ -62,4 +63,12 @@ margin: 1em;
 .client_button{
 background-color: #FDF5F4;
 vertical-align: middle;
+}
+.paginate__container{
+    display: flex;
+    justify-content: center;
+}
+.trainerPage_edit{
+    background-color:#FDF5F4;
+    border-radius: 10px;
 }

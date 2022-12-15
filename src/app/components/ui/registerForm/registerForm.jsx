@@ -60,17 +60,6 @@ const RegisterForm = () => {
         value: 8,
       },
     },
-    profession: {
-      isRequired: {
-        message: "Обязательно выберите вашу профессию",
-      },
-    },
-    licence: {
-      isRequired: {
-        message:
-          "Вы не можете использовать наш сервис без подтверждения лицензионного соглашения",
-      },
-    },
   };
   useEffect(() => {
     validate();

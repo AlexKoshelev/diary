@@ -68,6 +68,12 @@ const trainersSlice = createSlice({
     authRequested: (state) => {
       state.errors = null;
     },
+    trainerUpdeted: (state, action) => {
+      const elementIndex = state.entities.findIndex(
+        (t) => t._id === action.payload._id
+      );
+      state.entities[elementIndex] = action.payload;
+    },
   },
 });
 
@@ -78,13 +84,22 @@ const {
   trainersReceved,
   trainersRequestFiled,
   trainersCreate,
-
+  trainerUpdeted,
   authRequestFailed,
   authRequestSucces,
   trainerCreated,
   trainerLoggedOut,
 } = actions;
 
+export const updateTrainer = (data) => async (dispatch) => {
+  try {
+    const { content } = await trainersService.update(data);
+
+    dispatch(trainerUpdeted(content));
+  } catch (error) {
+    dispatch(trainersRequestFiled(error.message));
+  }
+};
 const authRequested = createAction("trainers/authRequested");
 const trainerCreateRequested = createAction("trainers/trainerCreateRequested");
 const createTrainerFailed = createAction("trainers/createTrainerFailed");
@@ -167,11 +182,18 @@ export const createTrainers = (trainers) => async (dispatch) => {
   }
 };
 export const getCurrentTrainerData = () => (state) => {
-  return state.trainers.entities
-    ? state.trainers.entities.find(
-        (u) => u._id === state.trainers.auth.trainerId
-      )
-    : null;
+  if (
+    state.trainers.entities &&
+    state.trainers.auth !== null &&
+    state.trainers.entities !== undefined &&
+    state.trainers.auth !== undefined
+  ) {
+    console.log(state.trainers.entities);
+
+    return state.trainers.entities.find(
+      (u) => u._id === state.trainers.auth.trainerId
+    );
+  }
 };
 
 export const getTrainers = () => (state) => state.trainers.entities;

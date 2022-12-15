@@ -4,8 +4,7 @@ import { ReactComponent as LogoEye } from "../../../../assets/svg/eye.svg";
 import { ReactComponent as LogoEyeSlash } from "../../../../assets/svg/eyeslash.svg";
 import "./textField.scss";
 import classNames from "classnames";
-const TextField = ({
-  label,
+const TextFieldParams = ({
   type,
   name,
   value,
@@ -63,10 +62,10 @@ const TextField = ({
     </div>
   );
 };
-TextField.defaultProps = {
+TextFieldParams.defaultProps = {
   type: "text",
 };
-TextField.propTypes = {
+TextFieldParams.propTypes = {
   label: PropTypes.string,
   type: PropTypes.string,
   placeholder: PropTypes.string,
@@ -76,4 +75,4 @@ TextField.propTypes = {
   error: PropTypes.string,
 };
 
-export default TextField;
+export default TextFieldParams;

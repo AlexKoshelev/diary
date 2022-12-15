@@ -5,9 +5,12 @@ import {
   getTrainersLoadingStatus,
   loadTrainersList,
 } from "../../../store/trainers";
-import loadingImage from "../../../assets/img/load.png";
-import { Suspense, useEffect } from "react";
-import { getClientsLoadingStatus } from "../../../store/clients";
+
+import { useEffect } from "react";
+import {
+  getClientsLoadingStatus,
+  loadClientsList,
+} from "../../../store/clients";
 
 const AppLoader = ({ children }) => {
   const trainerStatusLoading = useSelector(getTrainersLoadingStatus());
@@ -18,6 +21,7 @@ const AppLoader = ({ children }) => {
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(loadTrainersList());
+      dispatch(loadClientsList());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
