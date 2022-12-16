@@ -29,6 +29,12 @@ const clientsSlice = createSlice({
         (clients) => clients._id !== action.payload
       );
     },
+    clientUpdeted: (state, action) => {
+      const elementIndex = state.entities.findIndex(
+        (t) => t._id === action.payload._id
+      );
+      state.entities[elementIndex] = action.payload;
+    },
   },
 });
 
@@ -40,8 +46,21 @@ const {
   clientsRequestFiled,
   clientsCreated,
   clientsRemoved,
+  clientUpdeted,
 } = actions;
 
+export const updateClient = (id, data) => async (dispatch) => {
+  console.log(id);
+  console.log(data);
+
+  try {
+    const content = await clientsService.update(id, data);
+
+    dispatch(clientUpdeted(content));
+  } catch (error) {
+    dispatch(clientsRequestFiled(error.message));
+  }
+};
 export const loadClientsList = () => async (dispatch) => {
   dispatch(clientsRequested());
   try {
@@ -85,6 +104,11 @@ export const getClientsLoadingStatus = () => (state) => state.clients.isLoading;
 export const getClientsById = (id) => (state) => {
   if (state.clients.entities && state.clients.entities !== undefined) {
     return state.clients.entities.filter((client) => client.trainerId === id);
+  }
+};
+export const getCurrentClientsById = (id) => (state) => {
+  if (state.clients.entities && state.clients.entities !== undefined) {
+    return state.clients.entities.find((client) => client._id === id);
   }
 };
 export default clientsReducer;

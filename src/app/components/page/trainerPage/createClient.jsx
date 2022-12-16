@@ -1,15 +1,13 @@
 import { nanoid } from "nanoid";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { ReactComponent as AddLogo } from "../../../assets/svg/addsquare.svg";
 import { createClients } from "../../../store/clients";
-
-import TextFieldParams from "../../common/form/textField/textFieldParams";
 import PropTypes from "prop-types";
-const CreateClient = ({ currentTrainer }) => {
+import ClientForm from "../../common/clientForm";
+
+const CreateClient = ({ currentTrainer, hiddenState, setHiddenState }) => {
   const dispatch = useDispatch();
 
-  const [hiddenState, setHiddenState] = useState(false);
   const [clientData, setClientData] = useState({
     name: "",
     phone: "",
@@ -66,100 +64,26 @@ const CreateClient = ({ currentTrainer }) => {
       trainerId: currentTrainer._id,
     }));
   };
-  function handleShowForm() {
-    setHiddenState((prevState) => !prevState);
-  }
+
   return (
     <>
-      <div>
-        <button className="trainerPage_button" onClick={handleShowForm}>
-          <AddLogo />
-          Добавить клиента
-        </button>
-      </div>
       <div
         className={`${hiddenState ? "" : "hiddenForm "}createClient__container`}
       >
-        <form onSubmit={handleSubmit}>
-          <TextFieldParams
-            className="clients__info"
-            name="name"
-            value={clientData.name}
-            onChange={handleChange}
-            placeholder="Имя"
-          />
-          <TextFieldParams
-            className="clients__info"
-            name="phone"
-            value={clientData.phone}
-            onChange={handleChange}
-            placeholder="Номер телефона"
-          />
-          <TextFieldParams
-            className="clients__info"
-            name="age"
-            value={clientData.age}
-            onChange={handleChange}
-            placeholder="Возраст"
-          />
-          <TextFieldParams
-            className="clients__info"
-            name="growth"
-            value={clientData.growth}
-            onChange={handleChange}
-            placeholder="Рост"
-          />
-          <TextFieldParams
-            className="clients__info"
-            name="weight"
-            value={clientData.weight}
-            onChange={handleChange}
-            placeholder="Вес"
-          />
-          <TextFieldParams
-            className="clients__info"
-            name="waist"
-            value={clientData.waist}
-            onChange={handleChange}
-            placeholder="Обхват талии"
-          />
-          <TextFieldParams
-            className="clients__info"
-            name="bust"
-            value={clientData.bust}
-            onChange={handleChange}
-            placeholder="Обхват груди"
-          />
-          <TextFieldParams
-            className="clients__info"
-            name="hips"
-            value={clientData.hips}
-            onChange={handleChange}
-            placeholder="Обхват бёдер"
-          />
-          <TextFieldParams
-            className="clients__info"
-            name="leg"
-            value={clientData.leg}
-            onChange={handleChange}
-            placeholder="Обхват бедра"
-          />
-          <TextFieldParams
-            className="clients__info"
-            name="arm"
-            value={clientData.arm}
-            onChange={handleChange}
-            placeholder="Обхват руки"
-          />
-          <button className="trainerPage_addbtn" type="submit">
-            Добавить клиента
-          </button>
-        </form>
+        <ClientForm
+          handleSubmit={handleSubmit}
+          clientData={clientData}
+          handleChange={handleChange}
+          btnTitle="Добавить клиента"
+        />
       </div>
     </>
   );
 };
 CreateClient.propTypes = {
   currentTrainer: PropTypes.object,
+  clientCurrentData: PropTypes.object,
+
+  handleShowFormClient: PropTypes.func,
 };
 export default CreateClient;

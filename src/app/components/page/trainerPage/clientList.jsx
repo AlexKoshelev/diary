@@ -4,7 +4,7 @@ import { ReactComponent as RemoveLogo } from "../../../assets/svg/noteremove.svg
 import { ReactComponent as EditLogo } from "../../../assets/svg/edit.svg";
 import { paginate } from "../../../utils/paginate";
 import Pagination from "../../common/pagination/pagination";
-const ClientList = ({ clients, remove }) => {
+const ClientList = ({ clients, remove, handleEdit }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const count = clients.length;
   const pageSize = 4;
@@ -21,6 +21,7 @@ const ClientList = ({ clients, remove }) => {
             <button
               type="button"
               className="client_button"
+              onClick={() => handleEdit(c._id)}
               key={`${c._id}-edit`}
             >
               <EditLogo />
@@ -51,5 +52,6 @@ const ClientList = ({ clients, remove }) => {
 ClientList.propTypes = {
   clients: PropTypes.array,
   remove: PropTypes.func,
+  handleEdit: PropTypes.func,
 };
 export default ClientList;

@@ -9,13 +9,10 @@ const clientsService = {
     return data;
   },
   createClient: async (payload) => {
-    console.log(payload);
-
     const { data } = await httpService.put(
       clientsEndpoin + payload._id,
       payload
     );
-    console.log(data);
 
     return data;
   },
@@ -25,11 +22,8 @@ const clientsService = {
     );
     return data;
   },
-  update: async (payload) => {
-    const { data } = await httpService.patch(
-      clientsEndpoin + localStorageService.getTrainerId(),
-      payload
-    );
+  update: async (id, payload) => {
+    const { data } = await httpService.patch(clientsEndpoin + id, payload);
     return data;
   },
   removeClient: async (clientId) => {
