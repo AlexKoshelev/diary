@@ -43,7 +43,20 @@ const CreateClient = ({ currentTrainer }) => {
     };
     if (transformClientData) {
       dispatch(createClients(transformClientData));
-      setHiddenState((prevState) => !prevState);
+      setHiddenState();
+      setClientData({
+        name: "",
+        phone: "",
+        age: "",
+        arm: "",
+        bust: "",
+        growth: "",
+        hips: "",
+        leg: "",
+        waist: "",
+        weight: "",
+        trainerId: "",
+      });
     }
   };
   const handleChange = (target) => {
@@ -53,9 +66,9 @@ const CreateClient = ({ currentTrainer }) => {
       trainerId: currentTrainer._id,
     }));
   };
-  const handleShowForm = () => {
+  function handleShowForm() {
     setHiddenState((prevState) => !prevState);
-  };
+  }
   return (
     <>
       <div>

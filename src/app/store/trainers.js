@@ -92,8 +92,10 @@ const {
 } = actions;
 
 export const updateTrainer = (data) => async (dispatch) => {
+  console.log(data);
+
   try {
-    const { content } = await trainersService.update(data);
+    const content = await trainersService.update(data);
 
     dispatch(trainerUpdeted(content));
   } catch (error) {
@@ -183,13 +185,12 @@ export const createTrainers = (trainers) => async (dispatch) => {
 };
 export const getCurrentTrainerData = () => (state) => {
   if (
-    state.trainers.entities &&
+    state.trainers &&
+    state.trainers.entities !== null &&
     state.trainers.auth !== null &&
     state.trainers.entities !== undefined &&
     state.trainers.auth !== undefined
   ) {
-    console.log(state.trainers.entities);
-
     return state.trainers.entities.find(
       (u) => u._id === state.trainers.auth.trainerId
     );

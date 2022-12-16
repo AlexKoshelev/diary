@@ -53,7 +53,7 @@ const NavBar = () => {
               </NavLink>
             </div>
             <div className="header__item headerButton">
-              {currentTrainer ? (
+              {currentTrainer && currentTrainer !== "" ? (
                 <NavLink to="/trainerPage" className="href">
                   {currentTrainer.name}
                 </NavLink>

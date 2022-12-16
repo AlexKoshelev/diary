@@ -13,6 +13,7 @@ import { getCurrentTrainerData, logOut } from "../../../store/trainers";
 import CreateClient from "./createClient";
 import ClientList from "./clientList";
 import TrainerCard from "./trainerCard";
+
 const TrainerPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
