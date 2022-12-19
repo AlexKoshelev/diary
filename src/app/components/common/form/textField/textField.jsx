@@ -55,7 +55,6 @@ const TextField = ({
               ) : (
                 <LogoEye className="logo__eye" />
               )}
-              {/* <i className={"bi bi-eye" + (showPassword ? "-slash" : "")}></i> */}
             </button>
           )}
         </div>
