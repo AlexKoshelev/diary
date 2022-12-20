@@ -1,10 +1,19 @@
 import React from "react";
-/* import PropTypes from "prop-types"; */
+import PropTypes from "prop-types";
 import "./trainersCard.scss";
 import SelectField from "../../common/form/selectField/selectField";
-import TextField from "../../common/form/textField/textField";
 
-const TrainersCard = ({ clientsList, onChange }) => {
+import TextFieldTime from "../../common/form/textField/textFieldTime";
+
+const TrainersCard = ({
+  clientsList,
+  onChange,
+  handleChangeCardio,
+  workoutNumber,
+  dateToday,
+}) => {
+  console.log(workoutNumber);
+
   return (
     <div className="trainers__card">
       <div className="trainers__card-selector">
@@ -13,26 +22,42 @@ const TrainersCard = ({ clientsList, onChange }) => {
           value={clientsList.value}
           onChange={(target) => onChange(target.value)}
           options={clientsList}
-          error={""}
           name={"name"}
           key={clientsList.value}
         />
       </div>
       <div className="trainers__card-cardio">
-        <TextField
+        <TextFieldTime
           label={"Кардио:"}
           className="clients__info"
+          classNameInput="select__field trainerCard"
           name="name"
-          /* value={clientData.name} */
-          /*   onChange={handleChange} */
+          onChange={(target) => handleChangeCardio(target.value)}
         />
       </div>
-
+      <div className="trainers__card-info info__worknum">
+        <div className="info__worknum">
+          Тренеровка №
+          {workoutNumber || workoutNumber === 0 ? (
+            <span>{workoutNumber + 1}</span>
+          ) : (
+            <span>
+              :<div className="info__worknum-top">выберите клиента</div>
+            </span>
+          )}
+        </div>
+      </div>
       <div className="trainers__card-info">
-        <div className="info__worknum">Тренеровка:</div>
-        <div className="info__date">Дата</div>
+        <div className="info__date">Дата: {dateToday}г.</div>
       </div>
     </div>
   );
+};
+TrainersCard.propTypes = {
+  clientsList: PropTypes.array,
+  onChange: PropTypes.func,
+  handleChangeCardio: PropTypes.func,
+  workoutNumber: PropTypes.number,
+  dateToday: PropTypes.string,
 };
 export default TrainersCard;

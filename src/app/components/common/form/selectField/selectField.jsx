@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./selectField.scss";
+import classNames from "classnames";
 const SelectField = ({
   label,
   value,
@@ -9,6 +10,7 @@ const SelectField = ({
   options,
   error,
   name,
+  className,
 }) => {
   const handleChange = ({ target }) => {
     onChange({ name: target.name, value: target.value });
@@ -21,9 +23,9 @@ const SelectField = ({
     !Array.isArray(options) && typeof options === "object"
       ? Object.values(options)
       : options;
-
+  const classes = classNames("selectedField", className);
   return (
-    <div className="selectedField">
+    <div className={classes}>
       <label htmlFor={name} className="form__label">
         {label}
       </label>
@@ -34,7 +36,7 @@ const SelectField = ({
         value={value}
         onChange={handleChange}
       >
-        <option>{defaultOption}</option>
+        <option className="form__select">{defaultOption}</option>
         {optionsArray.length > 0 &&
           optionsArray.map((option) => (
             <option value={option.value} key={option.value}>
@@ -55,6 +57,7 @@ SelectField.propTypes = {
   error: PropTypes.string,
   options: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   name: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default SelectField;

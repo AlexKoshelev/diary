@@ -13,19 +13,22 @@ const TextField = ({
   error,
   placeholder,
   className,
+  inputClassName,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = ({ target }) => {
     onChange({ name: target.name, value: target.value });
   };
+  const inputClasses = classNames("form-control", inputClassName);
   const getInputClasses = () => {
-    return "form-control" + (error ? " is-invalid" : "");
+    return inputClasses + (error ? " is-invalid" : "");
   };
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState);
   };
   const classes = classNames("textfield", className);
+
   return (
     <div className={classes}>
       <label htmlFor={name}>{label}</label>

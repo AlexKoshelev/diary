@@ -1,14 +1,16 @@
+import { nanoid } from "nanoid";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useExercise } from "../../../hooks/useExercise";
-import { transformDate } from "../../../utils/transformDate";
-
+import { createWorkouts } from "../../../store/workouts";
 import "./table.scss";
 import TableHeader from "./tableHeader";
 import TableRow from "./tableRow";
+import PropTypes from "prop-types";
 
-const Table = ({ currentClientId }) => {
-  const dateToday = transformDate(new Date());
+const Table = ({ currentClientId, cardioTime, workoutNumber, dateToday }) => {
+  const dispatch = useDispatch();
 
   const {
     exercise1,
@@ -32,13 +34,12 @@ const Table = ({ currentClientId }) => {
     exercise10,
     handleChange10,
   } = useExercise();
-  console.log(currentClientId);
 
   const [workout, setWorkout] = useState({
     date: dateToday,
-    cardio: "",
-    clientId: "",
-    workNum: "",
+    cardio: cardioTime,
+    clientId: currentClientId,
+    workNum: workoutNumber++,
     exercise1: exercise1,
     exercise2: exercise2,
     exercise3: exercise3,
@@ -65,6 +66,8 @@ const Table = ({ currentClientId }) => {
       exercise9: exercise9,
       exercise10: exercise10,
       clientId: currentClientId,
+      cardio: cardioTime,
+      workNum: workoutNumber++,
     }));
   }, [
     exercise1,
@@ -78,11 +81,14 @@ const Table = ({ currentClientId }) => {
     exercise9,
     exercise10,
     currentClientId,
+    cardioTime,
+    workoutNumber,
   ]);
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newWorkout = { ...workout, _id: nanoid() };
 
-    console.log(workout);
+    dispatch(createWorkouts(newWorkout));
   };
 
   return (
@@ -103,12 +109,17 @@ const Table = ({ currentClientId }) => {
             <TableRow exercise={exercise10} onChange={handleChange10} />
           </tbody>
         </table>
-        <button className="form__btn" type="submit">
+        <button className="form__btn btn-save" type="submit">
           Сохранить тренировку
         </button>
       </form>
     </>
   );
 };
-
+Table.propTypes = {
+  currentClientId: PropTypes.string,
+  cardioTime: PropTypes.string,
+  workoutNumber: PropTypes.number,
+  dateToday: PropTypes.string,
+};
 export default Table;

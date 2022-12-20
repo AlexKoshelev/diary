@@ -64,19 +64,21 @@ export const loadworkoutsList = () => async (dispatch) => {
   dispatch(workoutsRequested());
   try {
     const content = await workoutsService.fetchAll();
+    console.log(content);
+
     dispatch(workoutsReceved(content));
   } catch (error) {
     dispatch(workoutsRequestFiled(error.message));
   }
 };
-export const createworkouts = (Workout) => async (dispatch) => {
-  console.log(Workout);
+export const createWorkouts = (workout) => async (dispatch) => {
+  console.log(workout);
 
   try {
-    const { content } = await workoutsService.createWorkout(Workout);
+    const { content } = await workoutsService.createWorkouts(workout);
     console.log(content);
 
-    dispatch(workoutsCreated(Workout));
+    dispatch(workoutsCreated(workout));
   } catch (error) {
     dispatch(workoutsRequestFiled(error.message));
   }
@@ -99,16 +101,14 @@ export const getCurrentWorkoutData = () => (state) => {
 };
 export const getworkouts = () => (state) => state.workouts.entities;
 
-export const getworkoutsLoadingStatus = () => (state) =>
+export const getWorkoutsLoadingStatus = () => (state) =>
   state.workouts.isLoading;
-export const getworkoutsById = (id) => (state) => {
+export const getWorkoutsById = (id) => (state) => {
   if (state.workouts.entities && state.workouts.entities !== undefined) {
-    return state.workouts.entities.filter(
-      (workout) => workout.trainerId === id
-    );
+    return state.workouts.entities.filter((workout) => workout.clientId === id);
   }
 };
-export const getCurrentworkoutsById = (id) => (state) => {
+export const getCurrentWorkoutsById = (id) => (state) => {
   if (state.workouts.entities && state.workouts.entities !== undefined) {
     return state.workouts.entities.find((workout) => workout._id === id);
   }

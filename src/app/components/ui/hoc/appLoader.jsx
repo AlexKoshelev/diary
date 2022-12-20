@@ -11,11 +11,12 @@ import {
   getClientsLoadingStatus,
   loadClientsList,
 } from "../../../store/clients";
+import { getWorkoutsLoadingStatus } from "../../../store/workouts";
 
 const AppLoader = ({ children }) => {
   const trainerStatusLoading = useSelector(getTrainersLoadingStatus());
   const clientStatusLoading = useSelector(getClientsLoadingStatus());
-
+  const workoutsLoadingStatus = useSelector(getWorkoutsLoadingStatus());
   const isLoggedIn = useSelector(getIsLoggedIn());
   const dispatch = useDispatch();
   useEffect(() => {
@@ -25,7 +26,8 @@ const AppLoader = ({ children }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
-  if (trainerStatusLoading && clientStatusLoading) return <div>"Загрузка"</div>;
+  if (trainerStatusLoading && clientStatusLoading && workoutsLoadingStatus)
+    return <div>"Загрузка"</div>;
   return children;
 };
 /* function Loading() {

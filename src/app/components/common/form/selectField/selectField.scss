@@ -13,15 +13,16 @@ background-color: #F4E1DD;
 .form__label{
     display: flex;
     color: $MAIN_COLOR3;
-    background-color: #F4E1DD;
+    background-color: $MAIN_COLOR1;
     font-size: 1rem;
     padding: 0px 0px 5px 0px;
 }
 .form__select{
     display: flex;
-    background-color: $MAIN_COLOR2;
+    background-color: $MAIN_COLOR1;
     color: $MAIN_COLOR3;
-    font-size: 1rem;
+    font-size: 0.75rem;
     border: none
     
 }
+

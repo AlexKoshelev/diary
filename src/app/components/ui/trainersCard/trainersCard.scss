@@ -3,10 +3,26 @@ $MAIN_COLOR2:#F4E1DD;
 $MAIN_COLOR3:#BD937B;
 $GOLD_COLOR:#B39365;
 .trainers__card{
+    height: 70px;
     display: flex;
     font-size: 0.75rem;
     justify-content: space-between;
     color: $MAIN_COLOR3;
     background-color: #FDF5F4;
     padding: 10px;
+}
+.trainers__card-info{
+    padding: 10px;
+}
+.info__worknum{
+    margin-bottom: 5px;
+}
+.info__worknum-top{
+    margin-top: 5px;
+}
+.select__field.trainerCard{
+    background-color: $MAIN_COLOR1;
+    border-bottom: solid 1px #BD937B;
+    max-width: 65px;
+    color: #BD937B;
 }

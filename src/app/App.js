@@ -7,10 +7,12 @@ import routes from "./routes";
 import { loadClientsList } from "./store/clients";
 
 import { loadTrainersList } from "./store/trainers";
+import { loadworkoutsList } from "./store/workouts";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(loadworkoutsList());
     dispatch(loadTrainersList());
     dispatch(loadClientsList());
     // eslint-disable-next-line react-hooks/exhaustive-deps
