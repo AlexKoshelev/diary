@@ -36,20 +36,20 @@ const Table = ({ currentClientId, cardioTime, workoutNumber, dateToday }) => {
   } = useExercise();
 
   const [workout, setWorkout] = useState({
-    date: dateToday,
-    cardio: cardioTime,
-    clientId: currentClientId,
-    workNum: workoutNumber++,
-    exercise1: exercise1,
-    exercise2: exercise2,
-    exercise3: exercise3,
-    exercise4: exercise4,
-    exercise5: exercise5,
-    exercise6: exercise6,
-    exercise7: exercise7,
-    exercise8: exercise8,
-    exercise9: exercise9,
-    exercise10: exercise10,
+    date: "",
+    cardio: "",
+    clientId: "",
+    workNum: "",
+    exercise1: "",
+    exercise2: "",
+    exercise3: "",
+    exercise4: "",
+    exercise5: "",
+    exercise6: "",
+    exercise7: "",
+    exercise8: "",
+    exercise9: "",
+    exercise10: "",
   });
 
   useEffect(() => {
@@ -68,6 +68,7 @@ const Table = ({ currentClientId, cardioTime, workoutNumber, dateToday }) => {
       clientId: currentClientId,
       cardio: cardioTime,
       workNum: workoutNumber++,
+      date: dateToday,
     }));
   }, [
     exercise1,
@@ -83,12 +84,14 @@ const Table = ({ currentClientId, cardioTime, workoutNumber, dateToday }) => {
     currentClientId,
     cardioTime,
     workoutNumber,
+    dateToday,
   ]);
   const handleSubmit = (e) => {
     e.preventDefault();
     const newWorkout = { ...workout, _id: nanoid() };
-
-    dispatch(createWorkouts(newWorkout));
+    if (newWorkout) {
+      dispatch(createWorkouts(newWorkout));
+    }
   };
 
   return (

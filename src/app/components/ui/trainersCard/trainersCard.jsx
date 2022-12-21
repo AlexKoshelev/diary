@@ -12,8 +12,6 @@ const TrainersCard = ({
   workoutNumber,
   dateToday,
 }) => {
-  console.log(workoutNumber);
-
   return (
     <div className="trainers__card">
       <div className="trainers__card-selector">

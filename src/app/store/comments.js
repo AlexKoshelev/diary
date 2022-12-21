@@ -40,10 +40,11 @@ const {
   commentsRemoved,
 } = actions;
 
-export const loadCommentsList = (userId) => async (dispatch) => {
+export const loadCommentsList = () => async (dispatch) => {
   dispatch(commentsRequested());
   try {
-    const { content } = await commentService.getComments(userId);
+    const content = await commentService.getComments();
+
     dispatch(commentsRecived(content));
   } catch (error) {
     dispatch(commentsRequestFailed(error.message));
@@ -51,7 +52,6 @@ export const loadCommentsList = (userId) => async (dispatch) => {
 };
 export const createComment = (comment) => async (dispatch) => {
   console.log(comment);
-
   try {
     const { content } = await commentService.createComment(comment);
     console.log(content);
@@ -74,10 +74,15 @@ export const removeComment = (id) => async (dispatch) => {
     dispatch(commentsRequestFailed(error.message));
   }
 };
-export const getComments = () => (state) =>
-  console.log(state.comments.entities);
+/* export const getComments = () => (state) =>
+  console.log(state.comments.entities); */
 export const getCommentsLoadingStatus = () => (state) =>
   state.comments.isLoading;
+export const getCommentsOfClients = (id) => (state) => {
+  if (state.comments.entities) {
+    return state.comments.entities.filter((comment) => comment.clientId === id);
+  }
+};
 
 export const getCommentsById = (id) => (state) =>
   state.comments.entities.find((prof) => prof._id === id);

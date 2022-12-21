@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import clientsReducer from "./clients";
+import commentsReducer from "./comments";
 
 import trainersReducer from "./trainers";
 import workoutsReducer from "./workouts";
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   trainers: trainersReducer,
   workouts: workoutsReducer,
   clients: clientsReducer,
+  comments: commentsReducer,
 });
 
 export function createStore() {

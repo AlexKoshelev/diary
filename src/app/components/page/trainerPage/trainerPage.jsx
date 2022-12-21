@@ -22,14 +22,14 @@ const TrainerPage = () => {
   const dispatch = useDispatch();
 
   const currentTrainer = useSelector(getCurrentTrainerData());
-
+  const currentTrainerId = currentTrainer && currentTrainer._id;
   const [currentClientId, setCurrentClientId] = useState("");
 
   const handleLogOut = () => {
     dispatch(logOut());
     navigate("/about");
   };
-  const clients = useSelector(getClientsById(currentTrainer._id));
+  const clients = useSelector(getClientsById(currentTrainerId));
   const clientCurrentData = useSelector(getCurrentClientsById(currentClientId));
 
   const handleDelete = (id) => {

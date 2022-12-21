@@ -12,6 +12,7 @@ import {
   loadClientsList,
 } from "../../../store/clients";
 import { getWorkoutsLoadingStatus } from "../../../store/workouts";
+import { loadCommentsList } from "../../../store/comments";
 
 const AppLoader = ({ children }) => {
   const trainerStatusLoading = useSelector(getTrainersLoadingStatus());
@@ -23,6 +24,7 @@ const AppLoader = ({ children }) => {
     if (isLoggedIn) {
       dispatch(loadTrainersList());
       dispatch(loadClientsList());
+      dispatch(loadCommentsList());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);

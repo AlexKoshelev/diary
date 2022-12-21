@@ -1,18 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./textAreaField.scss";
-const TextAreaField = ({ label, name, value, onChange, error }) => {
+const TextAreaField = ({ name, value, onChange, error }) => {
   const handleChange = ({ target }) => {
     onChange({ name: target.name, value: target.value });
   };
   const getInputClasses = () => {
-    return "form-control" + (error ? " is-invalid" : "");
+    return "text-area-inp" + (error ? " is-invalid" : "");
   };
 
   return (
     <div className="mb-4">
-      <label htmlFor={name}> {label}</label>
-      <div className="input-group has-validation">
+      <div className="textAreaField">
         <textarea
           id={name}
           name={name}
@@ -30,7 +29,6 @@ TextAreaField.defaultProps = {
   type: "text",
 };
 TextAreaField.propTypes = {
-  label: PropTypes.string,
   type: PropTypes.string,
   name: PropTypes.string,
   value: PropTypes.string,

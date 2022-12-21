@@ -9,13 +9,9 @@ const commentService = {
     );
     return data;
   },
-  getComments: async (pageId) => {
-    const { data } = await httpService.get(commentEndpoint, {
-      params: {
-        orderBy: '"pageId"',
-        equalTo: `"${pageId}"`,
-      },
-    });
+  getComments: async () => {
+    const { data } = await httpService.get(commentEndpoint);
+
     return data;
   },
   removeComment: async (commentId) => {

@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import TextAreaField from "../../../common/form/textAreaField/textAreaField";
 import { validator } from "../../../../utils/validator";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { loadCommentsList } from "../../../../store/comments";
 
 const AddCommentForm = ({ onSubmit }) => {
+  const dispatch = useDispatch();
   const [data, setData] = useState({});
   const [errors, setErrors] = useState({});
   const handleChange = (target) => {
@@ -33,20 +36,23 @@ const AddCommentForm = ({ onSubmit }) => {
     e.preventDefault();
     const isValid = validate();
     if (!isValid) return;
-    onSubmit(data);
-    clearForm();
+
+    if (data.content !== undefined) {
+      onSubmit(data);
+      clearForm();
+      dispatch(loadCommentsList());
+    }
   };
   return (
     <div className="comment__form-addComment">
       <form onSubmit={handleSubmit}>
-        <div className="">
-          <button className="">Создать заметку</button>
+        <div className="addComment__btn-container">
+          <button className="addComment__btn">Создать заметку</button>
         </div>
         <TextAreaField
           value={data.content || ""}
           onChange={handleChange}
           name="content"
-          label="Введите текст"
           error={errors.content}
         />
       </form>
