@@ -41,6 +41,8 @@ const AddCommentForm = ({ onSubmit }) => {
       onSubmit(data);
       clearForm();
       dispatch(loadCommentsList());
+      dispatch(loadCommentsList());
+      dispatch(loadCommentsList());
     }
   };
   return (

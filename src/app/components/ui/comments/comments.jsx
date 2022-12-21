@@ -1,6 +1,6 @@
 import { orderBy } from "lodash";
 import { nanoid } from "nanoid";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createComment,
@@ -9,6 +9,7 @@ import {
   loadCommentsList,
   removeComment,
 } from "../../../store/comments";
+import PropTypes from "prop-types";
 import AddCommentForm from "../comments/comments/addCommentForm";
 import "./comments.scss";
 import CommentsList from "./comments/commentsList";
@@ -20,6 +21,7 @@ const Comments = ({ selectClientId, dateToday }) => {
     dispatch(loadCommentsList());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const isLoading = useSelector(getCommentsLoadingStatus());
   const handleSubmit = (data) => {
     const comment = {
@@ -63,5 +65,8 @@ const Comments = ({ selectClientId, dateToday }) => {
     </>
   );
 };
-
+Comments.propTypes = {
+  selectClientId: PropTypes.string,
+  dateToday: PropTypes.string,
+};
 export default Comments;

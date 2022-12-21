@@ -3,13 +3,7 @@ import PropTypes from "prop-types";
 
 import { ReactComponent as RemoveLogo } from "../../../../assets/svg/noteremove.svg";
 
-const Comment = ({
-  content,
-
-  _id: id,
-  date,
-  onRemove,
-}) => {
+const Comment = ({ content, _id: id, date, onRemove }) => {
   return (
     <>
       <div className="comment__container">
@@ -29,9 +23,7 @@ const Comment = ({
 };
 Comment.propTypes = {
   content: PropTypes.string,
-  edited_at: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  created_at: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  userId: PropTypes.string,
+  date: PropTypes.string,
   onRemove: PropTypes.func,
   _id: PropTypes.string,
 };

@@ -1,14 +1,18 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { updateClient } from "../../../store/clients";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { getCurrentClientsById, updateClient } from "../../../store/clients";
 import ClientEditForm from "../../common/clientEditForm";
-const EditClientPage = ({
-  clientCurrentData,
-  showForm,
-  handleShowFormClient,
-}) => {
+import { ReactComponent as ExitLogo } from "../../../assets/svg/logoutcurve.svg";
+import "./clientPage.scss";
+const ClientPage = () => {
   const dispatch = useDispatch();
+  const params = useParams();
+  const { clientId } = params;
+  console.log(clientId);
+  const clientCurrentData = useSelector(getCurrentClientsById(clientId));
+  console.log(clientCurrentData);
+
   const [editClientData, setEditClientData] = useState({
     _id: clientCurrentData._id || "",
     name: clientCurrentData.name || "",
@@ -23,7 +27,6 @@ const EditClientPage = ({
     weight: clientCurrentData.params.weight || "",
     trainerId: clientCurrentData.trainerId || "",
   });
-
   const handleSubmitEditClient = (e) => {
     e.preventDefault();
     const transformEditClientData = {
@@ -56,30 +59,29 @@ const EditClientPage = ({
       [target.name]: target.value,
     }));
   };
+  const navigate = useNavigate();
   return (
-    <>
-      <div
-        className={`${showForm ? "" : "hiddenForm "}createClient__container`}
-      >
-        <button className="trainerPage_addbtn" onClick={handleShowFormClient}>
-          Скрыть форму редактирования
-        </button>
-        {clientCurrentData && (
+    <div className="_container">
+      <div className="clientpage__container">
+        <div className="clientpage__header">
+          <div>Страница клиента </div>
+          <button
+            className="clientpage__header-btn"
+            onClick={() => navigate(-1)}
+          >
+            <ExitLogo />
+          </button>
+        </div>
+        <div className={`createClient__container`}>
           <ClientEditForm
             handleSubmit={handleSubmitEditClient}
             clientData={editClientData}
             handleChange={handleChangeEditClient}
             btnTitle="Редактировать клиента"
-            onClick={handleShowFormClient}
           />
-        )}
+        </div>
       </div>
-    </>
+    </div>
   );
 };
-EditClientPage.propTypes = {
-  clientCurrentData: PropTypes.object,
-  showForm: PropTypes.bool,
-  handleShowFormClient: PropTypes.func,
-};
-export default EditClientPage;
+export default ClientPage;

@@ -12,6 +12,7 @@ import Comments from "../../ui/comments/comments";
 import { Calendar } from "antd";
 import { ReactComponent as Bookmark } from "../../../assets/svg/around.svg";
 import ClientCard from "../../ui/clientCard/clientCard";
+
 const DiaryPage = () => {
   const currentTrainer = useSelector(getCurrentTrainerData());
   const clients = useSelector(getClientsById(currentTrainer._id));
@@ -46,12 +47,16 @@ const DiaryPage = () => {
   const handleChangeCardio = (value) => {
     setCardioTime(value);
   };
+  const [selectedDate, setSelectedDate] = useState("");
+  console.log(currentClientWorkoutsList);
+
   const hahdleSelectDate = (date) => {
     const day = date.$D;
     const month = date.$M + 1;
     const year = date.$y;
 
     const selectDate = `${day}.${month}.${String(year).substr(2, 2)}`;
+    setSelectedDate(selectDate);
     console.log(selectDate);
   };
   const handleBookmark = (date) => {

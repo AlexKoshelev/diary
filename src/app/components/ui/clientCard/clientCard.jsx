@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./clientCard.scss";
+import { NavLink } from "react-router-dom";
 const ClientCard = ({ client }) => {
-  console.log(client.params);
+  const clientId = client && client._id;
 
   return (
     <div className="client__card">
@@ -24,7 +25,9 @@ const ClientCard = ({ client }) => {
           <h3>Бицепс: {client.params.arm}</h3>
         </div>
       </div>
-      <button className="client__card-link">Перейти на страницу клиента</button>
+      <button className="client__card-link">
+        <NavLink to={`${clientId}`}>Перейти на страницу клиента</NavLink>
+      </button>
     </div>
   );
 };

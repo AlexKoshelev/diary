@@ -1,5 +1,7 @@
 import { Navigate } from "react-router-dom";
 import About from "./components/page/about/about";
+import ClientPage from "./components/page/clientPage/clientPage";
+import DiaryPage from "./components/page/diary/diaryPage";
 
 import Nutrition from "./components/page/nutrition/nutrition";
 import ReviewsPage from "./components/page/reviewsPage/reviewsPage";
@@ -13,31 +15,41 @@ import Login from "./layouts/login";
 
 const routes = () => [
   {
-    path: "/",
+    path: "",
     element: <About />,
   },
   {
-    path: "/diary",
+    path: "diary",
     element: <Diary />,
+    children: [
+      {
+        path: "",
+        element: <DiaryPage />,
+      },
+      {
+        path: ":clientId",
+        element: <ClientPage />,
+      },
+    ],
   },
   {
-    path: "/rewiews",
+    path: "rewiews",
     element: <ReviewsPage />,
   },
   {
-    path: "/nutrition",
+    path: "nutrition",
     element: <Nutrition />,
   },
   {
-    path: "/workouts",
+    path: "workouts",
     element: <Workouts />,
   },
   {
-    path: "/trainerPage",
+    path: "trainerPage",
     element: <TrainerPage />,
   },
   {
-    path: "/login",
+    path: "login",
     element: <Login />,
     children: [
       {

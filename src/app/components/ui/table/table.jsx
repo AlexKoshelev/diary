@@ -86,12 +86,29 @@ const Table = ({ currentClientId, cardioTime, workoutNumber, dateToday }) => {
     workoutNumber,
     dateToday,
   ]);
+  const clearTable = () => {
+    setWorkout((prevState) => ({
+      ...prevState,
+      exercise1: "",
+      exercise2: "",
+      exercise3: "",
+      exercise4: "",
+      exercise5: "",
+      exercise6: "",
+      exercise7: "",
+      exercise8: "",
+      exercise9: "",
+      exercise10: "",
+      cardio: "",
+    }));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const newWorkout = { ...workout, _id: nanoid() };
-    if (newWorkout) {
-      dispatch(createWorkouts(newWorkout));
-    }
+
+    dispatch(createWorkouts(newWorkout));
+    clearTable();
+    console.log(workout);
   };
 
   return (
@@ -112,7 +129,7 @@ const Table = ({ currentClientId, cardioTime, workoutNumber, dateToday }) => {
             <TableRow exercise={exercise10} onChange={handleChange10} />
           </tbody>
         </table>
-        <button className="form__btn btn-save" type="submit">
+        <button className="table-btn" type="submit">
           Сохранить тренировку
         </button>
       </form>

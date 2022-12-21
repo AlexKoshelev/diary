@@ -7,6 +7,7 @@ const ClientEditForm = ({
   clientData,
   handleChange,
   btnTitle,
+  onClick,
 }) => {
   return (
     <>
@@ -91,7 +92,7 @@ const ClientEditForm = ({
           onChange={handleChange}
           placeholder="Обхват руки"
         />
-        <button className="trainerPage_addbtn" type="submit">
+        <button className="trainerPage_addbtn" type="submit" onClick={onClick}>
           {btnTitle}
         </button>
       </form>
@@ -103,5 +104,6 @@ ClientEditForm.propTypes = {
   clientData: PropTypes.object,
   handleChange: PropTypes.func,
   btnTitle: PropTypes.string,
+  onClick: PropTypes.func,
 };
 export default ClientEditForm;
