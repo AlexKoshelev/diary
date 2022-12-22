@@ -1,0 +1,63 @@
+$MAIN_COLOR1:#FDF5F4;
+$MAIN_COLOR2:#F4E1DD;
+$MAIN_COLOR3:#BD937B;
+$GOLD_COLOR:#B39365;
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+
+   
+   
+}
+.form__wrapper {
+
+    border: solid  1px $GOLD_COLOR;
+    border-radius: 20px;
+    background-color: #ffff;
+    padding: 40px;
+    margin: 10px; 
+    color: #BD937B;
+    font-size: 1rem; 
+    margin-bottom: 2em;
+}
+.form__login-text{
+   text-align: center;
+   color: $GOLD_COLOR;
+   font-weight: bold;
+
+
+}
+.form__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1em;
+    margin-right: 10px;
+}
+.text__main {
+    margin: 20px 0px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+.invalid-feedback{
+    font-size: 0.7rem;
+    margin-top: 4px;
+}
+.form__btn-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 0px 70px;
+
+}
+.form__btn {
+    background-color: #ffff;
+    color: $MAIN_COLOR3;
+}
+.form__btn:hover {
+    color: $GOLD_COLOR;
+    border-bottom: solid 1px $GOLD_COLOR;
+}
+

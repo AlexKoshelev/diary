@@ -1,0 +1,14 @@
+.client__card-flex{
+    display: flex;
+    justify-content: space-between;
+}
+.client__card{
+    font-size: 0.8rem;
+    line-height: 1rem;
+}
+.client__card-link{
+    background-color: #FDF5F4;
+    color: #BD937B;
+    margin-top: 25px;
+   text-decoration:underline;
+}

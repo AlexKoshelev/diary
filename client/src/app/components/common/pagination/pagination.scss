@@ -1,0 +1,24 @@
+$MAIN_COLOR1:#FDF5F4;
+$MAIN_COLOR2:#F4E1DD;
+$MAIN_COLOR3:#BD937B;
+$GOLD_COLOR:#B39365;
+ul.pagination{
+display: flex;
+background-color: $MAIN_COLOR2;
+align-items: center;
+
+}
+.page-item{
+ 
+}
+
+.page-link{
+    font-size: 0.8rem;
+    background-color: $MAIN_COLOR2;
+    color: $MAIN_COLOR3;
+    margin: 4px;
+}
+.active-pagination{
+    color: $GOLD_COLOR;
+     font-weight: 600;
+ }

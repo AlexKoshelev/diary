@@ -1,0 +1,28 @@
+$MAIN_COLOR1:#FDF5F4;
+$MAIN_COLOR2:#F4E1DD;
+$MAIN_COLOR3:#BD937B;
+$GOLD_COLOR:#B39365;
+
+.selectedField div{
+    color: $MAIN_COLOR3;
+    display: flex;
+}
+.selectedField option:active {
+background-color: #F4E1DD;
+}
+.form__label{
+    display: flex;
+    color: $MAIN_COLOR3;
+    background-color: $MAIN_COLOR1;
+    font-size: 1rem;
+    padding: 0px 0px 5px 0px;
+}
+.form__select{
+    display: flex;
+    background-color: $MAIN_COLOR1;
+    color: $MAIN_COLOR3;
+    font-size: 0.75rem;
+    border: none
+    
+}
+

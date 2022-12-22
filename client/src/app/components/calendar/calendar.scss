@@ -1,0 +1,99 @@
+$MAIN_COLOR1:#FDF5F4;
+$MAIN_COLOR2:#F4E1DD;
+$MAIN_COLOR3:#BD937B;
+$GOLD_COLOR:#B39365;
+
+.calendar__element{
+    height: 2em;
+    font-size: 0.8rem;
+    background-color: $MAIN_COLOR1;
+    color: $MAIN_COLOR3;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.calendar__element button{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: .25em .75em;
+    text-align: center;
+}
+.calendar__element button:focus, select:focus {
+    outline: none;
+}
+.calendar__element select{
+    padding: .25em .5em;
+}
+
+.calendar{
+    background-color: $MAIN_COLOR1;
+    border-radius: 18px;
+    color: $MAIN_COLOR3;
+    font-size: 0.8rem;
+    margin: 80  px 20px;
+    height: 277.8px;
+}
+.calendar header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+    border-bottom: solid 1px $MAIN_COLOR3;
+    padding: 8px;
+    
+}
+
+.calendar header button,
+.calendar header select {
+    margin: 0 4px;
+}
+
+.calendar table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: auto;
+}
+
+.calendar th {
+    vertical-align: middle;
+    text-align: center;
+    height: 36px;
+}
+
+.calendar .day {
+    padding: 4px 8px;
+    vertical-align: middle;
+    text-align: center;
+    border: 2px solid transparent;
+}
+
+.calendar .day:hover {
+    background-color: $MAIN_COLOR2;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+
+.calendar .day.selected {
+    background-color: $MAIN_COLOR2;
+    color: $GOLD_COLOR;
+    border-radius: 18px;
+}
+
+
+.calendar .day.today {
+    border: 2px solid $GOLD_COLOR; 
+    color: $GOLD_COLOR;
+    border-radius: 18px;
+}
+
+.calendar .day.today:hover {
+    background-color: $MAIN_COLOR2;
+    border-radius: 18px;
+}
+
+.calendar .day.today.selected {
+    border-radius: 18px;
+    border: 2px solid $MAIN_COLOR2;
+}
+
