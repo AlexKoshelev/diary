@@ -1,5 +1,5 @@
 {
-    "port":"7070",
+    "port":"8080",
     "mongoUri":"mongodb://ux3qmi2dkfjagkukmtwp:5tNucL4lPKd1YOL91o5O@n1-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017,n2-c2-mongodb-clevercloud-customers.services.clever-cloud.com:27017/btxmvdjkoxqvuc5?replicaSet=rs0",
     "accessSecret":"sfdfsdfsdfsf13r23feqDDe fdsfsdf",
     "refreshSecret":"fkdsojfs7fdjsjfelvfsFf fd2fsq"

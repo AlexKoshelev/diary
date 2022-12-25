@@ -9,12 +9,13 @@ const http = axios.create({
 
 http.interceptors.request.use(
   async function (config) {
+    const expiresDate = localStorageService.getTokenExpiresDate();
+    const refreshToken = localStorageService.getRefreshToken();
     if (configFile.isFirebase) {
       const containSlash = /\/$/gi.test(config.url);
       config.url =
         (containSlash ? config.url.slice(0, -1) : config.url) + ".json";
-      const expiresDate = localStorageService.getTokenExpiresDate();
-      const refreshToken = localStorageService.getRefreshToken();
+
       if (refreshToken && expiresDate < Date.now()) {
         const data = await authService.refresh();
         localStorageService.setTokens({
@@ -27,6 +28,23 @@ http.interceptors.request.use(
       const accessToken = localStorageService.getAccessToken();
       if (accessToken) {
         config.params = { ...config.params, auth: accessToken };
+      }
+    } else {
+      if (refreshToken && expiresDate < Date.now()) {
+        const data = await authService.refresh();
+        localStorageService.setTokens({
+          refreshToken: data.refreshToken,
+          accessToken: data.accessToken,
+          expiresIn: data.expiresIn,
+          trainerId: data.trainerId,
+        });
+      }
+      const accessToken = localStorageService.getAccessToken();
+      if (accessToken) {
+        config.headers = {
+          ...config.headers,
+          Authorization: `Bearer ${accessToken}`,
+        };
       }
     }
     return config;
@@ -45,10 +63,8 @@ function transformData(data) {
 http.interceptors.response.use(
   (res) => {
     if (configFile.isFirebase) {
-      res.data = transformData(
-        res.data
-      ); /*  res.data = { content: transformData(res.data) }; */
     }
+    res.data = transformData(res.data);
     return res;
   },
   function (error) {
@@ -58,7 +74,6 @@ http.interceptors.response.use(
       error.response.status < 500;
 
     if (!expectedErrors) {
-      console.log(error);
       toast.error("Something was wrong. Try it later");
     }
     return Promise.reject(error);

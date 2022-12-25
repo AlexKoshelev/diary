@@ -6,10 +6,11 @@ const schema = new Schema(
       type: String,
       required: true,
     },
+    _id: {
+      type: String,
+    },
     clientId: {
-      type: Schema.Types.ObjectId,
-      ref: "Clients",
-      required: true,
+      type: String,
     },
     date: {
       type: String,

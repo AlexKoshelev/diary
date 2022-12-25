@@ -14,7 +14,7 @@ const schema = new Schema(
       type: String,
     },
     phone: {
-      type: Number,
+      type: String,
     },
     sex: { type: String, enum: ["male", "female"] },
   },

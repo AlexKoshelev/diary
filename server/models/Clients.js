@@ -5,8 +5,11 @@ const schema = new Schema(
     name: {
       type: String,
     },
+    _id: {
+      type: String,
+    },
     phone: {
-      type: Number,
+      type: String,
     },
     trainerId: {
       type: Schema.Types.ObjectId,

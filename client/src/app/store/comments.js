@@ -56,20 +56,18 @@ export const createComment = (comment) => async (dispatch) => {
     const { content } = await commentService.createComment(comment);
     console.log(content);
 
-    dispatch(commentsCreate(content));
+    dispatch(commentsCreate(comment));
   } catch (error) {
     dispatch(commentsRequestFailed(error.message));
   }
 };
 
 export const removeComment = (id) => async (dispatch) => {
-  console.log(id);
-
   try {
     const content = await commentService.removeComment(id);
     console.log(content);
 
-    if (content === null) {
+    if (!content) {
       dispatch(commentsRemoved(id));
     }
   } catch (error) {

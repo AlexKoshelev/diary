@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const { check, validationResult } = require("express-validator");
 const Trainer = require("../models/Trainers");
-
+const chalk = require("chalk");
 const tokenService = require("../services/token.service");
 const router = express.Router({ mergeParams: true });
 
@@ -12,15 +12,13 @@ const router = express.Router({ mergeParams: true });
 // 3. hash password
 // 4. create user
 // 5. generate tokens
-router.post("/login/signup", [
+router.post("/signUp", [
   check("email", "Некорректный email").isEmail(),
   check("password", "Минимальная длина пароля 8 символов").isLength({ min: 8 }),
   async (req, res) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        console.log(errors);
-
         return res.status(400).json({
           error: {
             message: "INVALID_DATA",
@@ -66,7 +64,7 @@ router.post("/login/signup", [
 // 3. compare hashed password
 // 4. generate token
 // 5. return data
-router.post("/login/signin", [
+router.post("/signInWithPassword", [
   check("email", "Email некорректный").normalizeEmail().isEmail(),
   check("password", "Пароль не может быть пустым").exists(),
   async (req, res) => {
@@ -98,7 +96,7 @@ router.post("/login/signin", [
         password,
         exitingTrainer.password
       );
-
+      console.log(chalk.green(isPasswordEqual));
       if (!isPasswordEqual) {
         return res.status(400).send({
           error: {
@@ -114,6 +112,7 @@ router.post("/login/signin", [
       res.status(200).send({ ...tokens, trainerId: exitingTrainer._id });
     } catch (e) {
       console.log(e);
+
       res.status(500).json({
         message: "На сервере произошла ошибка. Попробуйте позже",
       });

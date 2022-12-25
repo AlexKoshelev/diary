@@ -70,14 +70,13 @@ export const loadClientsList = () => async (dispatch) => {
     dispatch(clientsRequestFiled(error.message));
   }
 };
-export const createClients = (client) => async (dispatch) => {
-  console.log(client);
-
+export const createClients = (payload) => async (dispatch) => {
   try {
-    const { content } = await clientsService.createClient(client);
+    const { content } = await clientsService.createClient(payload);
+
     console.log(content);
 
-    dispatch(clientsCreated(client));
+    dispatch(clientsCreated(payload));
   } catch (error) {
     dispatch(clientsRequestFiled(error.message));
   }
@@ -102,6 +101,8 @@ export const getClients = () => (state) => state.clients.entities;
 
 export const getClientsLoadingStatus = () => (state) => state.clients.isLoading;
 export const getClientsById = (id) => (state) => {
+  console.log(state);
+
   if (state.clients.entities && state.clients.entities !== undefined) {
     return state.clients.entities.filter((client) => client.trainerId === id);
   }

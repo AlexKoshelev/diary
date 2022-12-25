@@ -37,4 +37,16 @@ router.get("/", auth, async (req, res) => {
     });
   }
 });
+router.post("/", async (req, res) => {
+  try {
+    const newClient = await Trainers.create({
+      ...req.body,
+    });
+    res.status(201).send(newClient);
+  } catch (e) {
+    res.status(500).json({
+      message: "На сервере произошла ошибка. Попробуйте позже",
+    });
+  }
+});
 module.exports = router;

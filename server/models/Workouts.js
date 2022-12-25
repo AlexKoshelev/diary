@@ -5,13 +5,14 @@ const schema = new Schema(
     cardio: {
       type: String,
     },
+    _id: {
+      type: String,
+    },
     date: {
       type: String,
     },
     clientId: {
-      type: Schema.Types.ObjectId,
-      ref: "Clients",
-      required: true,
+      type: String,
     },
     exercise1: {
       name1: {

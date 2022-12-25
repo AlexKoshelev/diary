@@ -15,6 +15,8 @@ import ClientCard from "../../ui/clientCard/clientCard";
 
 const DiaryPage = () => {
   const currentTrainer = useSelector(getCurrentTrainerData());
+  console.log(currentTrainer);
+
   const clients = useSelector(getClientsById(currentTrainer._id));
   const [selectClientId, setSectClientId] = useState("");
   const [cardioTime, setCardioTime] = useState("");
@@ -74,7 +76,7 @@ const DiaryPage = () => {
   };
   return (
     <>
-      {currentTrainer && clients && (
+      {currentTrainer /* && clients */ && (
         <div className="_container">
           <div className="diary__layout">
             <div className="table__group">

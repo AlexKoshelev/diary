@@ -35,7 +35,7 @@ const trainersSlice = createSlice({
       state.isLoading = false;
     },
     trainersRequestFiled: (state, action) => {
-      state.error = action.payload;
+      state.errors = action.payload;
       state.isLoading = false;
     },
     trainersCreate(state, action) {
@@ -53,12 +53,7 @@ const trainersSlice = createSlice({
     authRequestFailed: (state, action) => {
       state.errors = action.payload;
     },
-    trainerCreated: (state, action) => {
-      if (!Array.isArray(state.entities)) {
-        state.entities = [];
-      }
-      state.entities.push(action.payload);
-    },
+
     trainerLoggedOut: (state) => {
       state.entities = null;
       state.isLoggedIn = false;
@@ -87,13 +82,10 @@ const {
   trainerUpdeted,
   authRequestFailed,
   authRequestSucces,
-  trainerCreated,
   trainerLoggedOut,
 } = actions;
 
 export const updateTrainer = (data) => async (dispatch) => {
-  console.log(data);
-
   try {
     const content = await trainersService.update(data);
 
@@ -103,22 +95,23 @@ export const updateTrainer = (data) => async (dispatch) => {
   }
 };
 const authRequested = createAction("trainers/authRequested");
-const trainerCreateRequested = createAction("trainers/trainerCreateRequested");
-const createTrainerFailed = createAction("trainers/createTrainerFailed");
+
 export const logIn =
   ({ payload }) =>
   async (dispatch) => {
     const { email, password } = payload;
+
     dispatch(authRequested());
     try {
-      const data = await authService.login({ email, password });
-      dispatch(authRequestSucces({ trainerId: data.localId }));
+      const data = await authService.login(email, password);
+
       localStorageService.setTokens(data);
+      dispatch(authRequestSucces({ trainerId: data.trainerId }));
+
       console.log("вы вошли");
     } catch (error) {
       const message = error.response.data.error.message;
       const code = error.response.data.error.code;
-      console.log(message);
 
       if (code === 400) {
         const errorMessage = generateAuthError(message);
@@ -128,42 +121,26 @@ export const logIn =
       }
     }
   };
-function createTrainer(payload) {
-  return async function (dispatch) {
-    dispatch(trainerCreateRequested());
-    try {
-      const { content } = await trainersService.create(payload);
-      dispatch(trainerCreated(content));
-    } catch (error) {
-      dispatch(createTrainerFailed(error.message));
-    }
-  };
-}
+
 export const logOut = () => (dispatch) => {
   localStorageService.removeAuthData();
   dispatch(trainerLoggedOut());
 };
 
-export const signUp =
-  ({ email, password, ...rest }) =>
-  async (dispatch) => {
-    dispatch(authRequested());
-    try {
-      const data = await authService.register({ email, password });
-      localStorageService.setTokens(data);
-      dispatch(authRequestSucces({ trainerId: data.localId }));
-      dispatch(
-        createTrainer({
-          _id: data.localId,
-          email,
-          ...rest,
-        })
-      );
-      console.log("вы зарегались");
-    } catch (error) {
-      dispatch(authRequestFailed(error.message));
-    }
-  };
+export const signUp = (payload) => async (dispatch) => {
+  dispatch(authRequested());
+  try {
+    console.log(payload);
+
+    const data = await authService.register(payload);
+    localStorageService.setTokens(data);
+    console.log(data);
+
+    dispatch(authRequestSucces({ trainerId: data.trainerId }));
+  } catch (error) {
+    dispatch(authRequestFailed(error.message));
+  }
+};
 /*  ----------------------------------------------------------------  */
 export const loadTrainersList = () => async (dispatch) => {
   dispatch(trainersRequested());
@@ -192,7 +169,7 @@ export const getCurrentTrainerData = () => (state) => {
     state.trainers.auth !== undefined
   ) {
     return state.trainers.entities.find(
-      (u) => u._id === state.trainers.auth.trainerId
+      (t) => t._id === state.trainers.auth.trainerId
     );
   }
 };

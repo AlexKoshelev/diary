@@ -74,8 +74,10 @@ const RegisterForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const isValid = validate();
-    if (!isValid) return;
+    /* const isValid = validate();
+    if (!isValid) return; */
+    console.log(data);
+
     dispatch(signUp(data));
     navigate("/workouts");
   };
@@ -133,7 +135,7 @@ const RegisterForm = () => {
           <button
             className="form__btn"
             type="submit"
-            disabled={!isValid || loginError}
+            /*  disabled={!isValid || loginError} */
           >
             Зарегистрироваться
           </button>

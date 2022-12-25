@@ -9,10 +9,7 @@ const workoutsService = {
     return data;
   },
   createWorkouts: async (payload) => {
-    const { data } = await httpService.put(
-      workoutsEndpoin + payload._id,
-      payload
-    );
+    const { data } = await httpService.post(workoutsEndpoin, payload);
 
     return data;
   },

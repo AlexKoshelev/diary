@@ -24,6 +24,8 @@ const Comments = ({ selectClientId, dateToday }) => {
 
   const isLoading = useSelector(getCommentsLoadingStatus());
   const handleSubmit = (data) => {
+    console.log(data);
+
     const comment = {
       ...data,
       date: dateToday,

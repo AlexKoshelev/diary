@@ -8,6 +8,7 @@ router
   .get(auth, async (req, res) => {
     try {
       const list = await Workouts.find();
+
       res.send(list);
     } catch (e) {
       res.status(500).json({

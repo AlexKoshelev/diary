@@ -44,12 +44,12 @@ const LoginForm = () => {
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
-  const isValid = Object.keys(errors).length === 0;
+  /*  const isValid = Object.keys(errors).length === 0; */
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const isValid = validate();
-    if (!isValid) return;
+    /*     const isValid = validate();
+    if (!isValid) return; */
     console.log(data);
     navigate("/workouts");
 
@@ -87,7 +87,7 @@ const LoginForm = () => {
           <button
             className="form__btn"
             type="submit"
-            disabled={!isValid || loginError}
+            /*   disabled={!isValid || loginError} */
           >
             Войти
           </button>

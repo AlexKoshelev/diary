@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router({ margeParams: true });
 const Comment = require("../models/Comment");
+const chalk = require("chalk");
+const auth = require("../middleware/auth.middleware");
 router
   .route("/")
   .get(auth, async (req, res) => {
@@ -14,12 +16,16 @@ router
     }
   })
   .post(auth, async (req, res) => {
+    console.log(chalk.red(req));
+
     try {
       const newComment = await Comment.create({
         ...req.body,
       });
       res.status(201).send(newComment);
     } catch (e) {
+      console.log(e);
+
       res.status(500).json({
         message: "На сервере произошла ошибка. Попробуйте позже",
       });
@@ -29,14 +35,11 @@ router
 router.delete("/:commentId", auth, async (req, res) => {
   try {
     const { commentId } = req.params;
-    const removedComment = await Clients.findById(commentId);
 
-    /*  if (removedClient.clientId.toString() === req.trainer._id) { */
+    const removedComment = await Comment.findById(commentId);
+
     await removedComment.remove();
     return res.send(null);
-    /*  } else {
-      res.status(401).json({ message: "Unauthorized" });
-    } */
   } catch (e) {
     res.status(500).json({
       message: "На сервере произошла ошибка. Попробуйте позже",
